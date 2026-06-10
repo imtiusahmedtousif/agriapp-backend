@@ -1,3 +1,9 @@
+
+import os
+
+import os
+
+from pydantic import BaseModel
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from pydantic import BaseModel  # <-- MAKE SURE THIS LINE IS HERE!
@@ -19,8 +25,10 @@ class AIChatSchema(BaseModel):
 
 @router.post("/ai-chat")
 async def process_ai_chat(payload: AIChatSchema):
-    GEMINI_API_KEY = "AQ.Ab8RN6KETNoVn7P2TYHYBSNeaU50R2BVHzyyw4DwchvhH5UFMg"
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={GEMINI_API_KEY}"
+    import os
+    
+    # Replace your raw API key assignment with this line:
+    api_key = os.environ.get("AQ.Ab8RN6KETNoVn7P2TYHYBSNeaU50R2BVHzyyw4DwchvhH5UFMg")
     
     # Context framing to keep the AI working strictly as a digital agronomist
     system_instruction = "You are an expert digital agronomist helping rural farmers. Give concise, actionable advice regarding crops, soil, and fertilizers."
